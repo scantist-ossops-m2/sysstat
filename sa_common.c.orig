@@ -1275,7 +1275,6 @@ void check_file_actlst(int *ifd, char *dfile, struct activity *act[],
 	sa_fread(*ifd, buffer, file_magic->header_size, HARD_SIZE);
 	memcpy(file_hdr, buffer, MINIMUM(file_magic->header_size, FILE_HEADER_SIZE));
 	free(buffer);
-	buffer = NULL;
 
 	SREALLOC(*file_actlst, struct file_activity, FILE_ACTIVITY_SIZE * file_hdr->sa_act_nr);
 	fal = *file_actlst;
