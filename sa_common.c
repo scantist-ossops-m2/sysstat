@@ -1319,6 +1319,7 @@ void check_file_actlst(int *ifd, char *dfile, struct activity *act[],
 	 */
 	memcpy(file_hdr, buffer, FILE_HEADER_SIZE);
 	free(buffer);
+	buffer = NULL;
 
 	/*
 	 * Sanity check.
