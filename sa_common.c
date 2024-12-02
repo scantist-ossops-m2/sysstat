@@ -447,7 +447,13 @@ void allocate_structures(struct activity *act[])
 	int i, j;
 
 	for (i = 0; i < NR_ACT; i++) {
+
 		if (act[i]->nr_ini > 0) {
+
+			/* Look for a possible overflow */
+			check_overflow((size_t) act[i]->msize, (size_t) act[i]->nr_ini,
+				       (size_t) act[i]->nr2);
+
 			for (j = 0; j < 3; j++) {
 				SREALLOC(act[i]->buf[j], void,
 						(size_t) act[i]->msize * (size_t) act[i]->nr_ini * (size_t) act[i]->nr2);
@@ -2131,6 +2137,7 @@ void check_file_actlst(int *ifd, char *dfile, struct activity *act[], unsigned i
 	}
 
 	free(buffer);
+	buffer = NULL;
 
 	/* Check that at least one activity selected by the user is available in file */
 	for (i = 0; i < NR_ACT; i++) {
